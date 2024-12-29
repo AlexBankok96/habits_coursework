@@ -142,3 +142,44 @@ cython_debug/
 
 # Additional project files
 *.pyc
+
+# Исключаем папки с ненужными файлами
+Application Data/
+Cookies/
+Local Settings/
+NetHood/
+PrintHood/
+Recent/
+SendTo/
+*.log
+*.bak
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Среда разработки
+.vscode/
+.idea/
+
+# Настройки системы
+.DS_Store
+Thumbs.db
+
+# Файлы, генерируемые Poetry
+poetry.lock
+*.egg-info/
+
+# Среда виртуальной среды
+venv/
+env/
+
+# Логи
+*.log
+
+# Директории и файлы, которые не относятся к проекту
+**/node_modules/
+**/.env
+**/.pytest_cache/
