@@ -6,16 +6,23 @@ class HabitsValidator:
         self.field = field
 
     def __call__(self, value):
+        if value['duration'] > 120:
+            raise serializers.ValidationError(
+                'Длительность привычки не может быть больше 120 секунд'
+            )
+        
+        
         if value['is_good']:
             if value['related'] or value['prize']:
                 raise serializers.ValidationError(
-                    'У приятной привычки не может быть связанной привычки или вознаграждения')
+                    'У приятной привычки не может быть связанной привычки или вознаграждения'
+                )
             if value['related'] and value['prize']:
                 raise serializers.ValidationError(
-                    'Может быть связанная привычка или вознаграждение,')
-            if value['duration'] > 120:
-                raise serializers.ValidationError(
-                    'Длительность привычки не может быть больше 2 минут')
+                    'Может быть либо связанная привычка, либо вознаграждение, но не оба сразу'
+                )
             if value['related']:
                 if not value['related'].is_good:
-                    raise serializers.ValidationError('Связанные привычки = приятные привычки')
+                    raise serializers.ValidationError(
+                        'Связанные привычки должны быть приятными'
+                    )
