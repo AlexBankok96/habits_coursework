@@ -1,11 +1,22 @@
-FROM python:3.12-slim
+FROM python:3.13
 
 WORKDIR /habits
 
 COPY pyproject.toml poetry.lock ./
-
-RUN pip install poetry && \
-    poetry config virtualenvs.create false &&  \
-    poetry install --no-dev
+RUN pip install poetry==1.8.2 && poetry config virtualenvs.create false && poetry install --no-dev
 
 COPY . .
+
+ENV POSTGRES_DB=${POSTGRES_DB}
+ENV POSTGRES_USER=${POSTGRES_USER}
+ENV POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+ENV POSTGRES_HOST=${POSTGRES_HOST}
+ENV POSTGRES_PORT=${POSTGRES_PORT}
+ENV SECRET_KEY=${SECRET_KEY}
+ENV DEBUG=${DEBUG}
+ENV CELERY_BROKER_URL=${CELERY_BROKER_URL}
+ENV CELERY_RESULT_BACKEND=${CELERY_RESULT_BACKEND}
+ENV TELEGRAM_TOKEN=${TELEGRAM_TOKEN}
+ENV TELEGRAM_URL=${TELEGRAM_URL}
+
+
